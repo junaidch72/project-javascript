@@ -112,6 +112,7 @@ equals = () => {
   let swap;
   let org;
   let org2;
+  let org3;
 
   for (let a = 0; a < storevalue.length; a++) {
     if (result2.match(storevalue[a].uservar)) {
@@ -124,7 +125,6 @@ equals = () => {
   while (result2.includes("pi")) {
     org = result2.slice(result2.indexOf("pi") - 1, result2.indexOf("pi"));
     org2 = result2.slice(result2.indexOf("pi") + 2, result2.indexOf("pi") + 3);
- 
 
     if (
       result2.indexOf("pi") > 0 &&
@@ -192,9 +192,7 @@ equals = () => {
       org !== "("
     ) {
       result2 = result2.replace("e", "*" + Math.E.toFixed(4));
-    }
-    
-    else if (
+    } else if (
       result2.slice(-1) !== "e" &&
       org2 !== "+" &&
       org2 !== "-" &&
@@ -202,12 +200,8 @@ equals = () => {
       org2 !== "/" &&
       org2 !== ")"
     ) {
-      result2 = result2.replace("e", Math.E.toFixed(4)+ "*");
-    }
-    
-    
-    
-    else {
+      result2 = result2.replace("e", Math.E.toFixed(4) + "*");
+    } else {
       result2 = result2.replace("e", Math.E.toFixed(4));
     }
   }
@@ -218,26 +212,49 @@ equals = () => {
     const x = result2.slice(result2.indexOf("cos"), j + 1);
     const val = result2.slice(result2.indexOf("cos") + 4, j);
     const cosf = Math.cos(eval(val)).toFixed(4);
-    org2 = result2.slice(j+1,j+2)
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
+    console.log(org2);
+    console.log(org3);
 
-
- if (
+    if (
+      result2.indexOf("cos") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, "*" + cosf + "*");
+      result2 = swap;
+    } else if (
       result2.indexOf("cos") > 0 &&
       org !== "+" &&
       org !== "-" &&
       org !== "*" &&
       org !== "/" &&
       org !== "("
-    )
-    
-    {
+    ) {
       swap = result2.replace(x, "*" + cosf);
 
       result2 = swap;
-    } 
-   
-   
-    else {
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, cosf + "*");
+      result2 = swap;
+    } else {
       swap = result2.replace(x, cosf);
 
       result2 = swap;
@@ -250,8 +267,26 @@ equals = () => {
     const x = result2.slice(result2.indexOf("sin"), j + 1);
     const val = result2.slice(result2.indexOf("sin") + 4, j);
     const sinf = Math.sin(eval(val)).toFixed(4);
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
 
     if (
+      result2.indexOf("sin") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, "*" + sinf + "*");
+      result2 = swap;
+    } else if (
       result2.indexOf("sin") > 0 &&
       org !== "+" &&
       org !== "-" &&
@@ -261,6 +296,16 @@ equals = () => {
     ) {
       swap = result2.replace(x, "*" + sinf);
 
+      result2 = swap;
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, sinf + "*");
       result2 = swap;
     } else {
       swap = result2.replace(x, sinf);
@@ -274,7 +319,25 @@ equals = () => {
     const x = result2.slice(result2.indexOf("tan"), j + 1);
     const val = result2.slice(result2.indexOf("tan") + 4, j);
     const tanf = Math.tan(val).toFixed(4);
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
     if (
+      result2.indexOf("tan") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, "*" + tanf + "*");
+      result2 = swap;
+    } else if (
       result2.indexOf("tan") > 0 &&
       org !== "+" &&
       org !== "-" &&
@@ -284,6 +347,16 @@ equals = () => {
     ) {
       swap = result2.replace(x, "*" + tanf);
 
+      result2 = swap;
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, tanf + "*");
       result2 = swap;
     } else {
       swap = result2.replace(x, tanf);
@@ -297,7 +370,8 @@ equals = () => {
     const x = result2.slice(result2.indexOf("log"), j + 1);
     const val = result2.slice(result2.indexOf("log") + 4, j);
     const logf = Math.log(eval(val)).toFixed(4);
-    org2 = result2.slice(j+1,j+2)
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
 
     if (
       result2.indexOf("log") > 0 &&
@@ -305,26 +379,40 @@ equals = () => {
       org !== "-" &&
       org !== "*" &&
       org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
       org !== "("
-    ){
+    ) {
+      swap = result2.replace(x, "*" + logf + "*");
+      result2 = swap;
+    } else if (
+      result2.indexOf("log") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "("
+    ) {
       swap = result2.replace(x, "*" + logf);
-       result2 = swap;
-    } 
 
-    else if(j > result2.indexOf(result2.slice(-1))&&
-    org2 !== "+" &&
-    org2 !== "-" &&
-    org2 !== "*" &&
-    org2 !== "/" &&
-    org2 !== ")"
-  ){
+      result2 = swap;
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
       swap = result2.replace(x, logf + "*");
       result2 = swap;
-
-    }
-   
-     else {
+    } else {
       swap = result2.replace(x, logf);
+
       result2 = swap;
     }
   }
@@ -334,7 +422,25 @@ equals = () => {
     const x = result2.slice(result2.indexOf("sq"), j + 1);
     const val = result2.slice(result2.indexOf("sq") + 3, j);
     const sqf = Math.pow(eval(val), 2);
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
     if (
+      result2.indexOf("sq") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, "*" + sqf + "*");
+      result2 = swap;
+    } else if (
       result2.indexOf("sq") > 0 &&
       org !== "+" &&
       org !== "-" &&
@@ -344,6 +450,16 @@ equals = () => {
     ) {
       swap = result2.replace(x, "*" + sqf);
 
+      result2 = swap;
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, sqf + "*");
       result2 = swap;
     } else {
       swap = result2.replace(x, sqf);
@@ -357,7 +473,25 @@ equals = () => {
     const x = result2.slice(result2.indexOf("√"), j + 1);
     const val = result2.slice(result2.indexOf("√") + 2, j);
     const sqrtf = Math.sqrt(eval(val));
+    org2 = result2.slice(j + 1, j + 2);
+    org3 = result2.slice(j, j + 1);
     if (
+      result2.indexOf("√") > 0 &&
+      org !== "+" &&
+      org !== "-" &&
+      org !== "*" &&
+      org !== "/" &&
+      org !== "(" &&
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, "*" + sqrtf + "*");
+      result2 = swap;
+    } else if (
       result2.indexOf("√") > 0 &&
       org !== "+" &&
       org !== "-" &&
@@ -367,6 +501,16 @@ equals = () => {
     ) {
       swap = result2.replace(x, "*" + sqrtf);
 
+      result2 = swap;
+    } else if (
+      org3 !== result2.slice(-1) &&
+      org2 !== "+" &&
+      org2 !== "-" &&
+      org2 !== "*" &&
+      org2 !== "/" &&
+      org !== "("
+    ) {
+      swap = result2.replace(x, sqrtf + "*");
       result2 = swap;
     } else {
       swap = result2.replace(x, sqrtf);
